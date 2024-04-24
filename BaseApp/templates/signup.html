@@ -28,56 +28,38 @@
                         <div class="card card-compact w-auto bg-base-100 shadow-xl">
                             <div class="card-body">
                                 
-                                <form class="card-body">
+                                <form class="card-body" method="post" action="{% url 'CreateNewAcc' %}">
+                                    {% csrf_token %}
                                     <h2 class="text-2xl font-semibold">SignUp Now</h2>
+
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            <div role="alert" class="alert alert-warning mt-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                                                <span>{{ message }}</span>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
                                     <div class="form-control">
                                         <label class="label">
                                         <span class="label-text">User Name</span>
                                         </label>
-                                        <input type="text" placeholder="User Name" class="input input-bordered" required />
+                                        <input name="username" type="text" placeholder="User Name" class="input input-bordered" required />
                                     </div>
                                     <div class="form-control">
                                         <label class="label">
                                         <span class="label-text">Email</span>
                                         </label>
-                                        <input type="email" placeholder="email" class="input input-bordered" required />
+                                        <input name="email" type="email" placeholder="email" class="input input-bordered" required />
                                     </div>
                                     <div class="form-control">
                                         <label class="label">
                                         <span class="label-text">Password</span>
                                         </label>
-                                        <input type="password" placeholder="password" class="input input-bordered" required />
-                                    </div>
-                                    <div class="flex">
-                                        <div class="form-control">
-                                            <label class="label">
-                                            <span class="label-text">State</span>
-                                            </label>
-                                            <input type="text" placeholder="State" class="input input-bordered" required />
-                                        </div>
-                                        <div class="form-control">
-                                            <label class="label">
-                                            <span class="label-text">City</span>
-                                            </label>
-                                            <input type="text" placeholder="City" class="input input-bordered ml-2" required />
-                                        </div>
-                                    </div>
-                                    <div class="flex">
-                                        <div class="form-control">
-                                            <label class="label">
-                                            <span class="label-text">Street</span>
-                                            </label>
-                                            <input type="text" placeholder="Street" class="input input-bordered" required />
-                                        </div>
-                                        <div class="form-control">
-                                            <label class="label">
-                                            <span class="label-text">Zip</span>
-                                            </label>
-                                            <input type="text" placeholder="Zip" class="input input-bordered ml-2" required />
-                                        </div>
+                                        <input name="password" type="password" placeholder="password" class="input input-bordered" required />
                                     </div>
                                     <div class="form-control mt-6">
-                                        <button class="btn btn-primary">Sign Up</button>
+                                        <button type="submit" class="btn btn-primary">Sign Up</button>
                                     </div>
                                 </form>
                             </div>
@@ -85,7 +67,7 @@
     
                         <div class=" mt-3 flex items-center justify-center">
                             <p class="">Already have an account? </p>
-                            <a class="link link-success font-semibold mx-2">Try Sign In</a>
+                            <a href="{% url 'login_view' %}" class="link link-success font-semibold mx-2">Try Sign In</a>
                         </div>
     
                     </div>

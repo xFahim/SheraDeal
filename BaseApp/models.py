@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Gadget_Data(models.Model):
     gadget_id = models.AutoField(primary_key=True)
@@ -25,23 +26,6 @@ class Location(models.Model):
     city = models.CharField(max_length=100)
     street = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=10)
-
-    def __unicode__(self):
-        return self.name
-
-class User(models.Model):
-    user_id = models.AutoField(primary_key=True)
-    user_name = models.TextField(unique=True)
-    email = models.EmailField(unique=True)
-    full_name = models.TextField()
-    location = models.OneToOneField(Location, on_delete=models.CASCADE)
-
-    def __unicode__(self):
-        return self.name
-
-class customer(models.Model):
-    customer_id = models.AutoField(primary_key=True)
-    User_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.name
@@ -74,7 +58,7 @@ class WishList(models.Model):
     list_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     Description = models.TextField()
-    customer_id = models.ForeignKey(customer, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.name

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-
+    {% load static %}
     <title>Django Tailwind</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
         <div class="navbar bg-base-100 h-[10%]">
             <div class="flex-1 m-5">
               <a class="btn btn-ghost text-xl h-20">
-                <img class="w-20" src="Assets/logo.png">
+                <img class="w-20" src="{% static '/logo.png' %}">
               </a>
               
 
@@ -41,7 +41,7 @@
                     </a>
                   </li>
                   <li><a>Settings</a></li>
-                  <li><a>Logout</a></li>
+                  <li><a href="{% url 'Logout' %}">Logout</a></li>
                 </ul>
               </div>
             </div>
