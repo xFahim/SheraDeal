@@ -1,0 +1,96 @@
+{% if gadget_data_feedbacks %}
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  {% for gadget_feedback in gadget_data_feedbacks %}
+  <div class="card bg-base-200 shadow-xl">
+    <figure class="mt-4"><img class="w-64" src="{{ gadget_feedback.gadget_data.image_url }}" alt="{{ gadget_feedback.gadget_data.name }}" /></figure>
+    <div class="card-body">
+      <h2 class="card-title">
+        {{ gadget_feedback.gadget_data.name }}
+      </h2>
+      <p class="font-bold text-xl">Price: {{ gadget_feedback.gadget_data.price }}</p>
+      <p>Rating: 
+        {% if gadget_feedback.avg_rating %}
+        <span class="text-2xl text-yellow-500">{{ gadget_feedback.avg_rating }}</span>
+        {% else %}
+        <span class="text-gray-500">No ratings yet</span>
+        {% endif %}
+      </p>
+      <a href="{{ gadget_feedback.gadget_data.product_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary w-32">Visit Now</a>
+      <div class="comments mt-4 bg-base-100 rounded-lg p-4 w-full">
+        <h3 class="font-bold mb-2 ">Comments/Feedbacks:</h3>
+        <ul>
+          {% for feedback in gadget_feedback.feedbacks|slice:":2" %}
+          <li class="mb-2">
+            <div class="flex items-center">
+              <div class="flex-shrink-0 mr-2">
+                <img src="https://randomuser.me/api/portraits/men/{{ forloop.counter }}.jpg" alt="User Avatar" class="rounded-full w-8 h-8" />
+              </div>
+              <div>
+                <p class=" font-bold">{{ feedback.user.username }}</p>
+                <p class="">{{ feedback.Feedback }}</p>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        {% if gadget_feedback.feedbacks|length > 2 %}
+        <button onclick="showMoreComments({{ forloop.counter0 }})" class="text-blue-500">Load more comments</button>
+        <ul id="comments{{ forloop.counter0 }}" class="hidden">
+          {% for feedback in gadget_feedback.feedbacks|slice:"2:" %}
+          <li class="mb-2">
+            <div class="flex items-center">
+              <div class="flex-shrink-0 mr-2">
+                <img src="https://randomuser.me/api/portraits/men/{{ forloop.counter }}.jpg" alt="User Avatar" class="rounded-full w-8 h-8" />
+              </div>
+              <div>
+                <p class=" font-bold">{{ feedback.user.username }}</p>
+                <p class="">{{ feedback.Feedback }}</p>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+
+      {% if user.is_authenticated %}
+      <div class="mt-4">
+        <form action="{% url 'add_feedback' %}" method="post" class="bg-base-200 p-4 rounded-lg">
+          {% csrf_token %}
+          <input type="hidden" name="gadget_id" value="{{ gadget_feedback.gadget_data.gadget_id }}">
+          <input type="hidden" name="skey" value="{{ skey }}">
+          <h3 class="font-bold mb-2">Add Your Feedback</h3>
+          <label for="feedback" class="block mb-2">Feedback</label>
+          <textarea name="feedback" id="feedback" class="textarea textarea-bordered textarea-lg w-full" placeholder="Type your comment here"></textarea>
+          <label for="rating" class="block mt-2">Rating</label>
+          <div class="rating">
+            <input type="radio" id="rating1" name="rating" value="1" class="mask mask-star">
+            <label for="rating1"></label>
+            <input type="radio" id="rating2" name="rating" value="2" class="mask mask-star">
+            <label for="rating2"></label>
+            <input type="radio" id="rating3" name="rating" value="3" class="mask mask-star" checked>
+            <label for="rating3"></label>
+            <input type="radio" id="rating4" name="rating" value="4" class="mask mask-star">
+            <label for="rating4"></label>
+            <input type="radio" id="rating5" name="rating" value="5" class="mask mask-star">
+            <label for="rating5"></label>
+          </div>
+          <button type="submit" class="btn btn-primary mt-5 ml-4">Submit</button>
+        </form>
+        
+      </div>      
+      {% endif %}
+
+      
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<script>
+  function showMoreComments(index) {
+    var comments = document.getElementById("comments" + index);
+    comments.classList.toggle("hidden");
+  }
+</script>

@@ -1,14 +1,23 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Website_Source(models.Model):
+    web_id = models.AutoField(primary_key=True)
+    name = models.TextField()
+    url = models.URLField()
+    def __unicode__(self):
+        return self.name
+
 class Gadget_Data(models.Model):
     gadget_id = models.AutoField(primary_key=True)
     category = models.TextField()
-    product_url = models.TextField()
+    product_url = models.URLField()
+    image_url = models.URLField()
     name = models.TextField()
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     InStock = models.BooleanField()
     LastUpdate = models.DateTimeField(auto_now=True)
+    SourceID = models.ForeignKey(Website_Source, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.name
@@ -43,14 +52,6 @@ class Feedback(models.Model):
     Feedback = models.TextField()
     rating = models.SmallIntegerField()
 
-    def __unicode__(self):
-        return self.name
-
-class Website_Source(models.Model):
-    web_id = models.AutoField(primary_key=True)
-    name = models.TextField()
-    url = models.URLField()
-    GadgetID = models.ForeignKey(Gadget_Data, on_delete=models.CASCADE)
     def __unicode__(self):
         return self.name
 

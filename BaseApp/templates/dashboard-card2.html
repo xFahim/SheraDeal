@@ -1,0 +1,58 @@
+<div class="card card-compact w-auto bg-base-100 shadow-xl mr-5">
+    <div class="card-body">
+        <h1 class="text-2xl">wishlist</h1>
+        <table class="table table-compact table-autosize min-h-[46vh]">
+            <thead>
+            <tr >
+                <th class="px-4 py-4">Name</th>
+                <th class="px-4 py-4">Price</th>
+                <th class="px-4 py-4">Source Name</th>
+                <th class="px-4 py-4">In Stock</th>
+                <th class="px-4 py-4">Last Update</th>
+                <th class="px-4 py-4">Avg. Rating</th>
+                <th class="px-4 py-4">Product URL</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for gadget_feedback in gadget_data_feedbacks %}
+            <tr >
+                <td>
+                <div class="flex items-center gap-3">
+                    <div class="avatar">
+                    <div class="mask mask-squircle w-16 h-16">
+                        <img src="{{ gadget_feedback.gadget_data.image_url }}" alt="Avatar Tailwind CSS Component" class="w-full h-full" />
+                    </div>
+                    </div>
+                    <div>
+                    <div class="font-bold text-lg">{{ gadget_feedback.gadget_data.name }}</div>
+                    <div class="text-sm opacity-50">{{ gadget_feedback.gadget_data.category }}</div>
+                    </div>
+                </div>
+                </td>
+                <td class="font-semibold text-lg">{{ gadget_feedback.gadget_data.price }}</td>
+                <td class="font-semibold text-lg">{{ gadget_feedback.gadget_data.price }}</td>
+                <td>
+                {% if gadget_feedback.gadget_data.InStock %}
+                <span class="text-green-500">Yes</span>
+                {% else %}
+                <span class="text-red-500">No</span>
+                {% endif %}
+                </td>
+                <td>{{ gadget_feedback.gadget_data.LastUpdate|date:"M d, Y" }}</td>
+                <td>
+                {% if gadget_feedback.avg_rating %}
+                <span class="text-2xl text-yellow-500">{{ gadget_feedback.avg_rating }}</span>
+                {% else %}
+                <span class="text-gray-500">No ratings yet</span>
+                {% endif %}
+                </td>
+                <td>
+                <a href="{{ gadget_feedback.gadget_data.product_url }}" class="text-blue-500 hover:underline">{{ gadget_feedback.gadget_data.product_url }}</a>
+                </td>
+            </tr>
+        
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div> 

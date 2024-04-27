@@ -1,0 +1,35 @@
+<!--Header -->
+<div class="navbar bg-base-100 h-[10%]">
+  <div class="flex-1 m-5">
+    <a href="{% url 'home' %}" class="btn btn-ghost text-xl h-20">
+      {% load static %}
+      <img class="w-20" src="{% static '/logo.png' %}">
+    </a>
+    
+
+    <a href="{% url 'home' %}" class="btn btn-ghost text-xl ml-4">Analytics  {{ searchType }} {{ location_txt }} </a>
+    <a href="{% url 'dashboard' %}" class="btn btn-ghost text-xl ml-2">Dashboard</a>
+  </div>
+  <div class="flex-none m-5">
+    
+    <div class="dropdown dropdown-end m-5">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+        <div class="avatar online placeholder">
+          <div class="bg-neutral text-neutral-content rounded-full w-9">
+            <span class="text-xl">AI</span>
+          </div>
+        </div>
+      </div>
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <li>
+          <a class="justify-between">
+            Profile
+            <span class="badge">New</span>
+          </a>
+        </li>
+        <li><a>Settings</a></li>
+        <li><a href="{% url 'Logout' %}">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

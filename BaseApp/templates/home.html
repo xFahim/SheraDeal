@@ -13,120 +13,86 @@
 	<body class="h-svh">
 
         <!--Header -->
-        <div class="navbar bg-base-100 h-[10%]">
-            <div class="flex-1 m-5">
-              <a class="btn btn-ghost text-xl h-20">
-                <img class="w-20" src="{% static '/logo.png' %}">
-              </a>
-              
+        {% include 'header.html' %}
 
-              <a class="btn btn-ghost text-xl ml-4">Analytics</a>
-              <a class="btn btn-ghost text-xl ml-2">Dashboard</a>
-            </div>
-            <div class="flex-none m-5">
-              
-              <div class="dropdown dropdown-end m-5">
-                <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-                  <div class="avatar online placeholder">
-                    <div class="bg-neutral text-neutral-content rounded-full w-9">
-                      <span class="text-xl">AI</span>
-                    </div>
-                  </div>
-                </div>
-                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                  <li>
-                    <a class="justify-between">
-                      Profile
-                      <span class="badge">New</span>
-                    </a>
-                  </li>
-                  <li><a>Settings</a></li>
-                  <li><a href="{% url 'Logout' %}">Logout</a></li>
-                </ul>
-              </div>
-            </div>
-        </div>
-
-
+      <form method="GET" action="{% url 'search' %}" class="hero flex  items-center justify-center h-[70%]  bg-base-200 w-full">
         <!--Search Box and content area -->
-        <div class="hero flex  items-center justify-center h-[70%]  bg-base-200 w-full">
 
-          <div class="hero-content text-center flex-col">
-            <div class="max-w-md">
-              <h1 class="text-5xl font-bold">Hello there</h1>
-              <p class="py-6">Welcome to Shera-Deal Search Analytics. 
-                Search with the specific brand and model number. 
-                We will bring you the best deal in the market. Additionally get valuebale insights of the product and market price. Cheers!
 
-              </p>
-            </div>
+        <div class="hero-content text-center flex-col">
+          <div class="max-w-md">
+            <h1 class="text-5xl font-bold">Hello there</h1>
+            <p class="py-6">Welcome to Shera-Deal Search Analytics. 
+              Search with the specific brand and model number. 
+              We will bring you the best deal in the market. Additionally get valuebale insights of the product and market price. Cheers!
 
-            <div class="flex items-center justify-center ">
-              <label class="input input-bordered flex items-center gap-2 w-3/5">
-                <input type="text" class="grow" placeholder="Search Your Device Name" />
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
-              </label>
-              <button class="btn btn-primary mx-2 w-40">Search</button>
-            </div>
-
-            
-            
+            </p>
           </div>
 
-          <div class="card w-96 bg-base-100 shadow-xl">
-            <div class="card-body">
-              <h6 class="footer-title">Custom Settings <div class="badge badge-secondary">Pro</div></h6> 
-
-              <p class="opacity-55">It is recommanded to use the default settings for the optimal search result. In case you know what you're doing, go ahread and make the changes as per need.</p>
-
-              <div class="flex mt-1">
-                <div>
-                  <p class="font-semibold mt-3 mb-1 opacity-50"> Search Based On:</p>
-                  <div class="flex justify-start mt-4">
-
-                    <input type="radio" name="radio-10" class="radio checked:bg-red-500 mx-2" checked />
-                    <p>Rating</p>
-                    
-                  </div>
-                  <div class="mt-2 flex">
-                    <input type="radio" name="radio-10" class="radio radio-primary mx-2" checked />
-                    <p>Price</p>
-                  </div>
-                </div>
-
-                <div class="divider lg:divider-horizontal"></div> 
-
-                <div>
-                  <p class="font-semibold mt-3 mb-1 opacity-50"> Location:</p>
-                  <div class=" flex justify-start">
-
-                    <select class="select select-bordered select-sm w-full ">
-                      <option disabled selected>Choose Here</option>
-                      <option>Dhaka</option>
-                      <option>Ctg</option>
-                      <option>Rajshahi</option>
-                      <option>Khulna</option>
-                      <option>Barishal</option>
-                    </select>
-                    
-                  </div>
-                  <div class="mt-2 flex">
-                    <button class="btn btn-sm">Auto Detect</button>
-                  </div>
-                </div>
-              </div>
-
-              <button class="btn btn-sm mt-2">Reset</button>
-              
-              
+          <div class="flex items-center justify-center">
+            <div class="input input-bordered flex items-center gap-2 w-3/5">
+                <input type="text" name="searchKey" class="grow" placeholder="Search Your Device Name" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70">
+                    <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
+                </svg>
             </div>
+            <button type="submit" class="btn btn-primary mx-2 w-40">Search</button>
           </div>
 
           
           
         </div>
 
-        
+        <div class="card w-96 bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h6 class="footer-title">Custom Settings <div class="badge badge-secondary">Pro</div></h6> 
+
+            <p class="opacity-55">It is recommanded to use the default settings for the optimal search result. In case you know what you're doing, go ahread and make the changes as per need.</p>
+
+            <div class="flex mt-1">
+              <div>
+                <p class="font-semibold mt-3 mb-1 opacity-50"> Search Based On:</p>
+                <div class="flex justify-start mt-4">
+
+                  <input name="searchType" value="rating" type="radio" name="radio-10" class="radio checked:bg-red-500 mx-2" checked />
+                  <p>Rating</p>
+                  
+                </div>
+                <div class="mt-2 flex">
+                  <input name="searchType" value="price" type="radio" name="radio-10" class="radio radio-primary mx-2" checked />
+                  <p>Price</p>
+                </div>
+              </div>
+
+              <div class="divider lg:divider-horizontal"></div> 
+
+              <div>
+                <p class="font-semibold mt-3 mb-1 opacity-50"> Location:</p>
+                <div class=" flex justify-start">
+
+                  <select name="location" class="select select-bordered select-sm w-full ">
+                    <option disabled selected>Choose Here</option>
+                    <option>Dhaka</option>
+                    <option>Ctg</option>
+                    <option>Rajshahi</option>
+                    <option>Khulna</option>
+                    <option>Barishal</option>
+                  </select>
+                  
+                </div>
+                <div class="mt-2 flex">
+                  <button class="btn btn-sm">Auto Detect</button>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-sm mt-2">Reset</button>
+            
+            
+          </div>
+        </div>
+
+      </form>
 
 
          <!--Footer -->

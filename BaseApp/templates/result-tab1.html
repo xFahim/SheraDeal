@@ -1,0 +1,127 @@
+{% if gadget_data_feedbacks %}
+<div class="flex">
+{% if gadget_data_feedbacks.0 %}
+<div class="card w-96 bg-base-200 shadow-xl">
+    <figure class="mt-4"><img class="w-48" src="{{ gadget_data_feedbacks.0.gadget_data.image_url }}" alt="Shoes" /></figure>
+    <div class="card-body">
+    <h2 class="card-title">
+        {{ gadget_data_feedbacks.0.gadget_data.name }}
+        <div class="badge badge-secondary">Best Deal</div>
+    </h2>
+    <p>{{ gadget_feedback.0.website_source.name }}</p>
+    <p class="font-bold text-xl">Price: {{ gadget_data_feedbacks.0.gadget_data.price }}</p>
+    <p>Rating: 
+        {% if gadget_data_feedbacks.0.avg_rating %}
+        <span class="text-2xl text-yellow-500">{{ gadget_data_feedbacks.0.avg_rating }}</span>
+        {% else %}
+        <span class="text-gray-500">No ratings yet</span>
+        {% endif %}
+    </p>
+    <div class="card-actions justify-end">
+        <a href="{{ gadget_data_feedbacks.0.gadget_data.product_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Visit Now</a>
+    </div>
+    </div>
+</div>
+{% endif %}
+
+{% if gadget_data_feedbacks.1 %}
+<div class="card w-96 bg-base-200 shadow-xl ml-4">
+    <figure class="mt-4"><img class="w-48" src="{{ gadget_data_feedbacks.1.gadget_data.image_url }}" alt="Shoes" /></figure>
+    <div class="card-body">
+    <h2 class="card-title">
+        {{ gadget_data_feedbacks.1.gadget_data.name }}
+        <div class="badge badge-primary">Alternative</div>
+    </h2>
+    <p>{{ gadget_feedback.0.website_source.name  }}</p>
+    <p class="font-bold text-xl">Price: {{ gadget_data_feedbacks.1.gadget_data.price }}</p>
+    <p>Rating: 
+        {% if gadget_data_feedbacks.1.avg_rating %}
+        <span class="text-2xl text-yellow-500">{{ gadget_data_feedbacks.1.avg_rating }}</span>
+        {% else %}
+        <span class="text-gray-500">No ratings yet</span>
+        {% endif %}
+    </p>
+    <div class="card-actions justify-end">
+        <a href="{{ gadget_data_feedbacks.1.gadget_data.product_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Visit Now</a>
+    </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="card w-96 bg-base-200 shadow-xl ml-4">
+    <figure class="mt-4"><img class="w-48" src="https://www.startech.com.bd/image/cache/catalog/mobile/apple/iphone-13/midnight/iphone-13-midnight-01-500x500.webp" alt="Shoes" /></figure>
+    <div class="card-body">
+    <h2 class="card-title">
+        iPhone 13
+        <div class="badge badge-accent"">Sponsored</div>
+    </h2>
+    <p class="font-bold text-xl">Price: 78000.00</p>
+    <p>Rating: 
+        4.6 (From Admin)
+    </p>
+    <div class="card-actions justify-end">
+        <a href="https://www.startech.com.bd/iphone-13-128-gb" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Buy Now</a>
+    </div>
+    </div>
+</div>
+</div>
+{% endif %}
+
+
+<div class="overflow-x-auto bg-base-100 mt-4">
+
+<table class="table table-compact table-autosize">
+    <thead>
+    <tr >
+        <th class="px-4 py-4">Name</th>
+        <th class="px-4 py-4">Price</th>
+        <th class="px-4 py-4">Source Name</th>
+        <th class="px-4 py-4">In Stock</th>
+        <th class="px-4 py-4">Last Update</th>
+        <th class="px-4 py-4">Avg. Rating</th>
+        <th class="px-4 py-4">Product URL</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for gadget_feedback in gadget_data_feedbacks %}
+    <tr >
+        <td>
+        <div class="flex items-center gap-3">
+            <div class="avatar">
+            <div class="mask mask-squircle w-16 h-16">
+                <img src="{{ gadget_feedback.gadget_data.image_url }}" alt="Avatar Tailwind CSS Component" class="w-full h-full" />
+            </div>
+            </div>
+            <div>
+            <div class="font-bold text-lg">{{ gadget_feedback.gadget_data.name }}</div>
+            <div class="text-sm opacity-50">{{ gadget_feedback.gadget_data.category }}</div>
+            </div>
+        </div>
+        </td>
+        <td class="font-semibold text-lg">{{ gadget_feedback.gadget_data.price }}</td>
+        <td class="font-semibold text-lg">{{ gadget_feedback.website_source.name }}</td>
+        <td>
+        {% if gadget_feedback.gadget_data.InStock %}
+        <span class="text-green-500">Yes</span>
+        {% else %}
+        <span class="text-red-500">No</span>
+        {% endif %}
+        </td>
+        <td>{{ gadget_feedback.gadget_data.LastUpdate|date:"M d, Y" }}</td>
+        <td>
+        {% if gadget_feedback.avg_rating %}
+        <span class="text-2xl text-yellow-500">{{ gadget_feedback.avg_rating }}</span>
+        {% else %}
+        <span class="text-gray-500">No ratings yet</span>
+        {% endif %}
+        </td>
+        <td>
+        <a href="{{ gadget_feedback.gadget_data.product_url }}" class="text-blue-500 hover:underline">{{ gadget_feedback.gadget_data.product_url }}</a>
+        </td>
+    </tr>
+
+    {% endfor %}
+    </tbody>
+</table>
+
+</div>

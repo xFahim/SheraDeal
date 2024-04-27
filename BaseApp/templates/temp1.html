@@ -1,0 +1,66 @@
+{% if gadget_data_feedbacks %}
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  {% for gadget_feedback in gadget_data_feedbacks %}
+  <div class="card bg-base-200 shadow-xl">
+    <figure class="mt-4"><img class="w-64" src="{{ gadget_feedback.gadget_data.image_url }}" alt="{{ gadget_feedback.gadget_data.name }}" /></figure>
+    <div class="card-body">
+      <h2 class="card-title">
+        {{ gadget_feedback.gadget_data.name }}
+      </h2>
+      <p class="font-bold text-xl">Price: {{ gadget_feedback.gadget_data.price }}</p>
+      <p>Rating: 
+        {% if gadget_feedback.avg_rating %}
+        <span class="text-2xl text-yellow-500">{{ gadget_feedback.avg_rating }}</span>
+        {% else %}
+        <span class="text-gray-500">No ratings yet</span>
+        {% endif %}
+      </p>
+      <a href="{{ gadget_feedback.gadget_data.product_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary w-32">Visit Now</a>
+      <div class="comments mt-4 bg-gray-800 rounded-lg p-4 w-full">
+        <h3 class="font-bold mb-2 text-white">Comments/Feedbacks:</h3>
+        <ul>
+          {% for feedback in gadget_feedback.feedbacks|slice:":2" %}
+          <li class="mb-2">
+            <div class="flex items-center">
+              <div class="flex-shrink-0 mr-2">
+                <img src="https://randomuser.me/api/portraits/men/{{ forloop.counter }}.jpg" alt="User Avatar" class="rounded-full w-8 h-8" />
+              </div>
+              <div>
+                <p class="text-gray-300 font-bold">{{ feedback.user.username }}</p>
+                <p class="text-gray-400">{{ feedback.Feedback }}</p>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        {% if gadget_feedback.feedbacks|length > 2 %}
+        <button onclick="showMoreComments({{ forloop.counter0 }})" class="text-blue-500">Load more comments</button>
+        <ul id="comments{{ forloop.counter0 }}" class="hidden">
+          {% for feedback in gadget_feedback.feedbacks|slice:"2:" %}
+          <li class="mb-2">
+            <div class="flex items-center">
+              <div class="flex-shrink-0 mr-2">
+                <img src="https://randomuser.me/api/portraits/men/{{ forloop.counter }}.jpg" alt="User Avatar" class="rounded-full w-8 h-8" />
+              </div>
+              <div>
+                <p class="text-gray-300 font-bold">{{ feedback.user.username }}</p>
+                <p class="text-gray-400">{{ feedback.Feedback }}</p>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<script>
+  function showMoreComments(index) {
+    var comments = document.getElementById("comments" + index);
+    comments.classList.toggle("hidden");
+  }
+</script>
